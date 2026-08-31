@@ -1,5 +1,5 @@
 from heapq import heappop,heappush
-from ANode import Node
+from backend.ANode import Node
     
 #Finds index of blank
 def findBlank(board):

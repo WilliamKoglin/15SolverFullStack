@@ -1,6 +1,6 @@
-from ASolvable import solvable
-from ANode import Node
-from AStarAlgo import AStarSolve
+from backend.ASolvable import solvable
+from backend.ANode import Node
+from backend.AStarAlgo import AStarSolve
 
 
 def boardSolve():

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from ASolve import boardSolve
+from backend.ASolve import boardSolve
 
 app = FastAPI()
 
