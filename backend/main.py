@@ -1,8 +1,12 @@
 from fastapi import FastAPI
 from ASolve import boardSolve
+from pydantic import BaseModel
 
 app = FastAPI()
 
-@app.get("/")
-def home():
-    return boardSolve()
+class PuzzleData (BaseModel):
+    puzz : list
+
+@app.post("/")
+def solve(puzzle: PuzzleData):
+    return {"solution" : boardSolve(tuple(puzzle.puzz))}
