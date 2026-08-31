@@ -7,6 +7,6 @@ app = FastAPI()
 class PuzzleData (BaseModel):
     puzz : list
 
-@app.post("/")
+@app.post("/solve")
 def solve(puzzle: PuzzleData):
     return {"solution" : boardSolve(tuple(puzzle.puzz))}
