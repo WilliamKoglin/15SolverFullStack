@@ -1,0 +1,19 @@
+.replay-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.replay-controls .btn {
+  padding: 0.5rem 0.9rem;
+}
+
+.replay-controls__progress {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.8;
+  min-width: 4ch;
+  text-align: center;
+}

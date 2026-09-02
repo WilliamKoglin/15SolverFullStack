@@ -1,0 +1,12 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(4px, 1.5vmin, 10px);
+  width: 100%;
+  max-width: min(90vw, 90vh, 520px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  padding: clamp(6px, 2vmin, 14px);
+  background: #1e1b4b;
+  border-radius: 16px;
+}
