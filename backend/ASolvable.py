@@ -25,7 +25,24 @@ def blankRowFind(board):
     bRow = floor(index/rows)
     return (bRow)
 
+#Find duplicates in board
+def validVals(board):
+    vals = {}
+    for val in board:
+        if val<0 or val>15:
+            return False
+        try:
+            vals[val]
+        except:
+            vals[val] = 0
+        else:
+            return False
+    return True
+
+
 #Validates solvability
 def solvable(board):
-    validNum = countMisTiles(board)+blankRowFind(board)
-    return validNum%2 == 1
+    if(validVals(board)):
+        validNum = countMisTiles(board)+blankRowFind(board)
+        return validNum%2 == 1
+    else: return False
