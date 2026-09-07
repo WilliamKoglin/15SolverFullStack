@@ -73,28 +73,3 @@ export function arrowKeyToBlankMove(key) {
       return null;
   }
 }
-
-// Shuffle via valid moves from solved state -> always solvable.
-export function generateShuffledBoard(moves = 200) {
-  let board = [...SOLVED];
-  let last = null;
-  const opposite = { U: "D", D: "U", L: "R", R: "L" };
-
-  for (let i = 0; i < moves; i++) {
-    const options = ["U", "D", "L", "R"].filter((d) => d !== opposite[last]);
-    for (let j = options.length - 1; j > 0; j--) {
-      const k = Math.floor(Math.random() * (j + 1));
-      [options[j], options[k]] = [options[k], options[j]];
-    }
-    for (const dir of options) {
-      const next = applyBlankMove(board, dir);
-      if (next) {
-        board = next;
-        last = dir;
-        break;
-      }
-    }
-  }
-  if (isSolved(board)) return generateShuffledBoard(moves);
-  return board;
-}

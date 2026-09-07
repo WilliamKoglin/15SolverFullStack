@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from ASolve import boardSolve
-from ASolvable import solvable
+from shuffle import shuffle
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -28,6 +28,6 @@ class BoardData (BaseModel):
 def solve(puzzle: PuzzleData):
     return {"solution" : boardSolve(tuple(puzzle.puzz))}
 
-@app.post("/validate")
-def valid(puzzle: BoardData):
-    return {"solvable" : solvable(tuple(puzzle.board))}
+@app.get("/shuffle")
+def genBoard():
+    return {"board" : shuffle()}
