@@ -1,14 +1,28 @@
-// Renders the full solution as a scrollable list of tile moves, highlighting
-// the current step. `solution` is an array of tile VALUES.
+// src/components/MoveLog.jsx
 import { useEffect, useRef } from "react";
 import "./MoveLog.css";
 
 export default function MoveLog({ solution, currentStep, onSelectStep }) {
+  const listRef = useRef(null);
   const activeRef = useRef(null);
 
-  // Keep the active move scrolled into view during playback.
+  // Scroll WITHIN the log box only — never the page.
   useEffect(() => {
-    activeRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    const list = listRef.current;
+    const active = activeRef.current;
+    if (!list || !active) return;
+
+    const listTop = list.scrollTop;
+    const listBottom = listTop + list.clientHeight;
+    const itemTop = active.offsetTop;
+    const itemBottom = itemTop + active.offsetHeight;
+
+    // Only scroll the container if the active item is out of view.
+    if (itemTop < listTop) {
+      list.scrollTop = itemTop;
+    } else if (itemBottom > listBottom) {
+      list.scrollTop = itemBottom - list.clientHeight;
+    }
   }, [currentStep]);
 
   if (!Array.isArray(solution) || solution.length === 0) {
@@ -20,9 +34,8 @@ export default function MoveLog({ solution, currentStep, onSelectStep }) {
       <div className="move-log__header">
         Moves <span className="move-log__count">({solution.length})</span>
       </div>
-      <ol className="move-log__list">
+      <ol className="move-log__list" ref={listRef}>
         {solution.map((tileValue, i) => {
-          // currentStep 0 = original board; move i corresponds to step i+1.
           const isActive = currentStep === i + 1;
           const isDone = currentStep > i + 1;
           return (

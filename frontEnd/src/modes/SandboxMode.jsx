@@ -14,7 +14,7 @@ import {
 } from "../logic/puzzle.js";
 import "./mode.css";
 
-export default function SandboxMode() {
+export default function SandboxMode({ active }) {
   // Board state — null until the backend gives us one.
   const [originalBoard, setOriginalBoard] = useState(null);
   const [board, setBoard] = useState(null);
@@ -73,12 +73,12 @@ export default function SandboxMode() {
 
   // Keyboard controls.
   useEffect(() => {
-    if (showReplay || !board) return;
-    const onKey = (e) => {
-      const dir = arrowKeyToBlankMove(e.key);
+    if (showReplay || !board || !active) return;
+    const onKey = (e) => {       // <-- did the handler fire?
+      const dir = arrowKeyToBlankMove(e.key);           // <-- did it map to a move?
       if (!dir) return;
       e.preventDefault();
-      const next = applyBlankMove(board, dir);
+      const next = applyBlankMove(board, dir);         // <-- did the move succeed?
       if (next) {
         setBoard(next);
         setUserMoves((m) => m + 1);
@@ -86,7 +86,7 @@ export default function SandboxMode() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [board, showReplay]);
+  }, [board, showReplay, active]); 
 
   /* -------------------- Ask the solver -------------------- */
   const handleShowSolver = useCallback(async () => {
