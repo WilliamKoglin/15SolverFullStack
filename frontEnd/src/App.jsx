@@ -1,3 +1,4 @@
+// src/App.jsx
 import { useState } from "react";
 import SandboxMode from "./modes/SandboxMode.jsx";
 import InputMode from "./modes/InputMode.jsx";
@@ -31,7 +32,13 @@ export default function App() {
       </header>
 
       <main className="app__main">
-        {mode === "sandbox" ? <SandboxMode /> : <InputMode />}
+        {/* Both stay mounted; inactive one is hidden, so state persists. */}
+        <div hidden={mode !== "sandbox"}>
+          <SandboxMode active={mode === "sandbox"} />
+        </div>
+        <div hidden={mode !== "input"}>
+          <InputMode />
+        </div>
       </main>
     </div>
   );
