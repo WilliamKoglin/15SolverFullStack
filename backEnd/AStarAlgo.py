@@ -43,15 +43,17 @@ def AStarSolve(init,sol):
         count +=1
         curr = heappop(priorityHeap)[1]
         if curr.board == sol:
-            moves = []
-            while curr.parent:
-                moves.append(curr.prev)
-                curr=curr.parent
-            print(f'Nodes expanded: {count}')
-            return moves[::-1]
+            return traceBack(curr)
         else:
             for item in getNeighbors(curr.board):
                 if item[0] not in exp:
                    newNode = Node(item[0],curr,item[1])
                    heappush(priorityHeap,(newNode.fCost,newNode))
                    exp.add(item[0])
+
+def traceBack(node):
+    moves = []
+    while node.parent:
+        moves.append(node.prev)
+        node = node.parent
+    return moves[::-1]

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from ASolve import boardSolve
+from backEnd.Solve import boardSolve
 from shuffle import shuffle
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
