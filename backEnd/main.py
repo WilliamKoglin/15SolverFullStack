@@ -8,6 +8,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:5173",
+    "https://one5solverfullstack.onrender.com",
 ]
 
 app.add_middleware(
