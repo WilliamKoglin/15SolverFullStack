@@ -1,4 +1,4 @@
-from ASolvable import solvable
+from solvable import solvable
 from random import randint
 
 def generateBoard():

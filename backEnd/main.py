@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from backEnd.Solve import boardSolve
+from IDAStarSolve import IDAStarSolve
 from shuffle import shuffle
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
@@ -27,7 +27,7 @@ class BoardData (BaseModel):
 
 @app.post("/solve")
 def solve(puzzle: PuzzleData):
-    return {"solution" : boardSolve(tuple(puzzle.puzz))}
+    return {"solution" : IDAStarSolve(tuple(puzzle.puzz))}
 
 @app.get("/shuffle")
 def genBoard():
